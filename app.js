@@ -3,7 +3,7 @@ const gameState = {
     currentPlayer: 'X',
     
 }
-
+// test comment
 const b1 = document.getElementById('box1');
 const b2 = document.getElementById('box2');
 const b3 = document.getElementById('box3');
