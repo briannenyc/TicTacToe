@@ -7,7 +7,6 @@ body {
 .boardContainer {
     display: flex;
     justify-content: center;
-    border-style:
     
 }
 
@@ -32,8 +31,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-style:
-    border-color: pink
 }
 
 .header {
@@ -64,8 +61,7 @@ body {
     display: flex;
     margin: 5% 0;
     justify-content: center;
-    border-style:
-    border-color: purple;
+    
 }
 
 #reset {
