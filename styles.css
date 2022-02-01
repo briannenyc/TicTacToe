@@ -1,4 +1,80 @@
 body {
     margin: 0;
-    background-color: grey;
+    background-color:whitesmoke;
 }
+
+
+.boardContainer {
+    display: flex;
+    justify-content: center;
+    border-style:
+    
+}
+
+.gameboard {
+    
+    margin-left: auto;
+    margin-right: auto;
+    margin: 5% 0;
+    border-style: solid;
+    border-color: black;
+}
+
+.btn{
+    background-color: white;
+    height: 50px;
+    width: 50px;
+}
+
+
+#playerForm {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style:
+    border-color: pink
+}
+
+.header {
+    border-style:solid;
+    border-color: red;
+    margin: 5% 0;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+}
+
+#introHeader {
+    font-size: 60px;
+    margin: 0;
+    
+}
+
+#playerTurn {
+    font-family: 'Quicksand', sans-serif;
+}
+
+#outro {
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+.footer {
+    display: flex;
+    margin: 5% 0;
+    justify-content: center;
+    border-style:
+    border-color: purple;
+}
+
+#reset {
+    width: 150px;
+    height: 40px;
+    border: 5px solid purple;
+  border-radius: 5px;
+}
+
+
+/* font-family: 'Playfair Display', serif;
+font-family: 'Quicksand', sans-serif; */

@@ -3,7 +3,7 @@ const gameState = {
     currentPlayer: 'X',
     
 }
-// test comment
+
 const b1 = document.getElementById('box1');
 const b2 = document.getElementById('box2');
 const b3 = document.getElementById('box3');
@@ -33,6 +33,7 @@ playerName = playerInput.value;
 
 intro.innerText = `Let's Play Tic Tac Toe, ${playerName}!`;
 playerInput.value = "";
+playerTurn.innerText = "X goes first!"
 })
 
 reset.addEventListener('click', resetGame )
@@ -40,12 +41,12 @@ reset.addEventListener('click', resetGame )
 function resetGame(){
     console.log("this works now too");
     outro.innerText = "Click to Play!";
-    playerTurn.innerText = "";
+    playerTurn.innerText = "X goes first!";
     gameState.currentPlayer = 'X';
     for (var i = 0 ; i < Object.keys(btn).length; i++){
         btn[i].innerText = "-";
         btn[i].disabled = false; 
-    // for (var i = 0 ; i < Object.keys(btn).length; i++) {
+    
         
     
 }}
@@ -85,20 +86,28 @@ function checkButton (){
 function checkWinner () {
     if (b1.innerText === gameState.currentPlayer && b2.innerText === gameState.currentPlayer && b3.innerText === gameState.currentPlayer){
      outro.innerText = "You Win!";
+     playerTurn.innerText = "Congratulations!";
     } else if (b4.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer){
          outro.innerText = "You Win!";
+         playerTurn.innerText = "Congratulations!";
     } else if (b7.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
         outro.innerText = "You Win!";
+        playerTurn.innerText = "Congratulations!";   
     } else if (b1.innerText === gameState.currentPlayer && b4.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
         outro.innerText = "You Win!";
+        playerTurn.innerText = "Congratulations!";
     } else if (b2.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer){
-    outro.innerText = "You Win!";
+        outro.innerText = "You Win!";
+        playerTurn.innerText = "Congratulations!";
     } else if (b3.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
         outro.innerText = "You Win!";
+        playerTurn.innerText = "Congratulations!";
     } else if (b1.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
         outro.innerText = "You Win!";
+        playerTurn.innerText = "Congratulations!";
     } else if (b3.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
         outro.innerText = "You Win!";
+        playerTurn.innerText = "Congratulations!";
     } else {
         outro.innerText = "No Winner! Keep Playing!";}
 }
