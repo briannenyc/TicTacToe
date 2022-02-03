@@ -1,6 +1,9 @@
 body {
     margin: 0;
-    background-color:whitesmoke;
+    background-image: url("xo_back.png");
+    background-color: whitesmoke;
+    background-size: cover;
+    
 }
 
 
@@ -15,8 +18,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin: 5% 0;
-    border-style: solid;
-    border-color: black;
+    /* border-style: solid;
+    border-color: black; */
 }
 
 .btn{
@@ -34,15 +37,15 @@ body {
 }
 
 .header {
-    border-style:solid;
-    border-color: red;
-    margin: 5% 0;
+    /* border-style:solid; */
+    /* border-color: rgb(176, 74, 235); */
+    margin: 3% 10%;
     text-align: center;
     font-family: 'Playfair Display', serif;
 }
 
 #introHeader {
-    font-size: 60px;
+    font-size: 70px;
     margin: 0;
     
 }
@@ -72,5 +75,3 @@ body {
 }
 
 
-/* font-family: 'Playfair Display', serif;
-font-family: 'Quicksand', sans-serif; */
