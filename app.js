@@ -17,26 +17,75 @@ const intro = document.getElementById('introHeader');
 const outro = document.getElementById('outro');
 const reset = document.getElementById('reset');
 const playerForm = document.getElementById('playerForm')
-const playerInput = document.getElementById('playerInput');
+const playerOneInput = document.getElementById('playerOneInput');
+const playerTwoInput = document.getElementById('playerTwoInput');
 const playerTurn = document.getElementById('playerTurn')
-const submitButton = document.getElementById('submitButton');
-
+const submitButtonOne = document.getElementById('submitButtonOne');
 const btn = document.getElementsByClassName('btn');
 
-let playerName = "";
+let playerOneName = "";
 let playWin = false;
-let square 
+let onePlayerGame = false;
+
+
+function initialGameStart(){
+    let game = prompt('One player or two?');
+    if (game.toLowerCase() === "one"){
+      playerTwoInput.style.display = "none";
+      playerTurn.innerText = "Enter Your Name to Play";
+      onePlayerGame = true;
+
+    }else if (game.toLowerCase() === "two"){
+        playerTwoInput.style.display = 'block';
+        onePlayerGame = false;
+    } else {
+        console.log("im broken");
+    }
+}
+
+initialGameStart();
+
+
+
+
+
+// TWO PLAYER INPUTS
 
 playerForm.addEventListener('submit', function(event){
 event.preventDefault();
-console.log("works")
+// console.log("works")
 
-playerName = playerInput.value;
+playerOneName = playerOneInput.value;
+playerTwoName = playerTwoInput.value;
 
-intro.innerText = `Let's Play Tic Tac Toe, ${playerName}!`;
-playerInput.value = "";
-playerTurn.innerText = "X goes first!"
+
+if (onePlayerGame === true){
+    intro.innerText = `Let's Play Tic Tac Toe, ${playerOneName}!`
+} else {
+    intro.innerText = `Let's Play Tic Tac Toe, ${playerOneName} and ${playerTwoName}!`
+}
+
+playerOneInput.value = "";
+playerTwoInput.value = "";
+playerTurn.innerText = `${playerOneName} goes first!`
 })
+
+function computerPlay(){
+    
+    let bucket = []
+    for (var i = 0 ; i < Object.keys(btn).length; i++) {
+        if (btn[i].innerText === "-"){
+          bucket.push(btn[i])
+        }}
+        
+    const randomIndex = Math.floor(Math.random() * bucket.length);
+     
+    const computersNextSpot = bucket[randomIndex]
+    
+    computersNextSpot.innerText = gameState.currentPlayer
+
+    }
+
 
 
 // PLAY GAME
@@ -45,7 +94,7 @@ for (var i = 0 ; i < Object.keys(btn).length; i++) {
     btn[i].addEventListener('click', play)
 }
 function play(event){
-      console.log("here")
+    //   console.log("here")
       event.target.innerText = gameState.currentPlayer
       
       checkHorizontal();
@@ -56,6 +105,20 @@ function play(event){
 
       checkButton ();
 
+      if (onePlayerGame){
+
+
+        computerPlay();    
+
+        checkHorizontal();
+        checkVertical();
+        checkDiagonal();
+  
+        switchPlayer();
+  
+        checkButton ();
+      }
+
 }
 
 
@@ -65,7 +128,7 @@ function checkHorizontal () {
         b4.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer ||
         b7.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer) {
         playWin = true;
-        outro.innerText = "Winner Winner";
+        outro.innerText = "Winner, Winner!";
     } else {
         outro.innerText = "No Winner Keep Playing!";
     }
@@ -77,7 +140,7 @@ function checkVertical () {
         b2.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer ||
         b3.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer) {
         playWin = true;
-        outro.innerText = "Winner Winner";
+        outro.innerText = "Winner, Winner!";
         }
     }
 
@@ -87,7 +150,7 @@ function checkDiagonal () {
         if (b1.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer ||
             b3.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
             playWin = true;
-            outro.innerText = "Winner Winner";
+            outro.innerText = "Winner, Winner!";
             }
         }
         
@@ -123,7 +186,7 @@ function checkButton (){
 reset.addEventListener('click', resetGame )
    
 function resetGame(){
-    console.log("this works now too");
+    // console.log("this works now too");
     outro.innerText = "Click to Play!";
     playerTurn.innerText = "X goes first!";
     gameState.currentPlayer = 'X';
@@ -131,74 +194,10 @@ function resetGame(){
         btn[i].innerText = "-";
         btn[i].disabled = false; 
     }
-playWin = false;
+    playWin = false;
+    intro.innerText = "Tic Tac Toe";
+    playerTurn.innerText = "Enter Your Names to Play";
+    initialGameStart();
 }
 
 
-
-
-
-// function checkWinner () {
-//     if (b1.innerText === gameState.currentPlayer && b2.innerText === gameState.currentPlayer && b3.innerText === gameState.currentPlayer){
-//      outro.innerText = "You Win!";
-//      playerTurn.innerText = "Congratulations!";
-//      playerWin = true;
-//     } else if (b4.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer){
-//          outro.innerText = "You Win!";
-//          playerTurn.innerText = "Congratulations!";
-//          playerWin = true;
-//     } else if (b7.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
-//         outro.innerText = "You Win!";
-//         playerTurn.innerText = "Congratulations!";   
-//         playerWin = true;
-//     } else if (b1.innerText === gameState.currentPlayer && b4.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
-//         outro.innerText = "You Win!";
-//         playerTurn.innerText = "Congratulations!";
-//         playerWin = true;
-//     } else if (b2.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer){
-//         outro.innerText = "You Win!";
-//         playerTurn.innerText = "Congratulations!";
-//         playerWin = true;
-//     } else if (b3.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
-//         outro.innerText = "You Win!";
-//         playerTurn.innerText = "Congratulations!";
-//         playerWin = true;
-//     } else if (b1.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
-//         outro.innerText = "You Win!";
-//         playerTurn.innerText = "Congratulations!";
-//         playerWin = true;
-//     } else if (b3.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
-//         outro.innerText = "You Win!";
-//         playerTurn.innerText = "Congratulations!";
-//         playerWin = true;
-//     } else {
-//         outro.innerText = "No Winner! Keep Playing!";}
-// }
-
-
-
-
-
-    
-
-
-
-/* Start with player x
-player x inputs into an empty box, check to see if winning array is met
-if it is, you win, else, switch to player o
-player o inputs into an empty box, check to see if winning array is met
-if it is, you win, else, swtich to player x
-Repeat until winning array is met
-if no winning array is met, you lose
-restart game.
-
-a winning array =
-// box 1, 2, 3 win [0, 1, 2]
-// box 4, 5, 6 win [3, 4, 5]
-// box 7, 8, 9 win [6, 7, 8]
-// box 1, 4, 7 win [0, 3, 6]
-// box 2, 5, 8 win [1, 4, 7]
-// box 3, 6, 9 win [2, 5, 8]
-// box 1, 5, 9 win [0, 4, 8]
-// box 3, 5, 7 win [2, 4, 6]
-*/
