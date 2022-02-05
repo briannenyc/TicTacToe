@@ -38,21 +38,8 @@ playerInput.value = "";
 playerTurn.innerText = "X goes first!"
 })
 
-reset.addEventListener('click', resetGame )
-   
-function resetGame(){
-    console.log("this works now too");
-    outro.innerText = "Click to Play!";
-    playerTurn.innerText = "X goes first!";
-    gameState.currentPlayer = 'X';
-    for (var i = 0 ; i < Object.keys(btn).length; i++){
-        btn[i].innerText = "-";
-        btn[i].disabled = false; 
-    
-        
-    
-}}
 
+// PLAY GAME
 
 for (var i = 0 ; i < Object.keys(btn).length; i++) {
     btn[i].addEventListener('click', play)
@@ -61,39 +48,50 @@ function play(event){
       console.log("here")
       event.target.innerText = gameState.currentPlayer
       
-      checkWinner();
-      
-    //   playerDoesWin( b1, b2, b3);
-    //   playerDoesWin( b4, b5, b6);
-    //   playerDoesWin( b7, b8, b9);
-    //   playerDoesWin( b1, b4, b7);
-    //   playerDoesWin( b2, b5, b8);
-    //   playerDoesWin( b3, b6, b9);
-    // //   playerDoesWin( b1, b5, b9);
-    // //   playerDoesWin( b3, b5, b7);
+      checkHorizontal();
+      checkVertical();
+      checkDiagonal();
 
       switchPlayer();
 
       checkButton ();
 
-
-   
 }
 
 
+function checkHorizontal () {
+   
+    if (b1.innerText === gameState.currentPlayer && b2.innerText === gameState.currentPlayer && b3.innerText === gameState.currentPlayer ||
+        b4.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer ||
+        b7.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer) {
+        playWin = true;
+        outro.innerText = "Winner Winner";
+    } else {
+        outro.innerText = "No Winner Keep Playing!";
+    }
+}
+
+function checkVertical () {
+   
+    if (b1.innerText === gameState.currentPlayer && b4.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer ||
+        b2.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer ||
+        b3.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer) {
+        playWin = true;
+        outro.innerText = "Winner Winner";
+        }
+    }
 
 
-
-// function playerDoesWin (num1, num2, num3) {
-//     console.log(num1.innerText, num2.innerText, num3.innerText)
-//     if (num1.innerText === gameState.currentPlayer && num2.innerText === gameState.currentPlayer && num3.innerText === gameState.currentPlayer) {
-//         playWin = true;
-//         outro.innerText = "Winner Winner";
-//     } else {
-//         outro.innerText = "No Winner Keep Playing!";
-//     }
-// }
-
+function checkDiagonal () {
+   
+        if (b1.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer ||
+            b3.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
+            playWin = true;
+            outro.innerText = "Winner Winner";
+            }
+        }
+        
+    
 
 function switchPlayer (){
     if (gameState.currentPlayer === 'X'){
@@ -105,57 +103,77 @@ function switchPlayer (){
 }
 
 
-
 function checkButton (){
     for (var i = 0 ; i < Object.keys(btn).length; i++) {
         if (btn[i].innerText !== "-"){
           btn[i].disabled = true;  
         }
-    }
-    let square = btn[i];
-
-    if (playWin === true) {
-     square.disabled = true;
+        if (playWin === true) {
+            btn[i].disabled = true;
+           }
     }
 
+    if (playWin === true){
+        playerTurn.innerText = "Congratulations!"
+    }
 }
 
-function checkWinner () {
-    if (b1.innerText === gameState.currentPlayer && b2.innerText === gameState.currentPlayer && b3.innerText === gameState.currentPlayer){
-     outro.innerText = "You Win!";
-     playerTurn.innerText = "Congratulations!";
-     playerWin = true;
-    } else if (b4.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer){
-         outro.innerText = "You Win!";
-         playerTurn.innerText = "Congratulations!";
-         playerWin = true;
-    } else if (b7.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
-        outro.innerText = "You Win!";
-        playerTurn.innerText = "Congratulations!";   
-        playerWin = true;
-    } else if (b1.innerText === gameState.currentPlayer && b4.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
-        outro.innerText = "You Win!";
-        playerTurn.innerText = "Congratulations!";
-        playerWin = true;
-    } else if (b2.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer){
-        outro.innerText = "You Win!";
-        playerTurn.innerText = "Congratulations!";
-        playerWin = true;
-    } else if (b3.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
-        outro.innerText = "You Win!";
-        playerTurn.innerText = "Congratulations!";
-        playerWin = true;
-    } else if (b1.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
-        outro.innerText = "You Win!";
-        playerTurn.innerText = "Congratulations!";
-        playerWin = true;
-    } else if (b3.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
-        outro.innerText = "You Win!";
-        playerTurn.innerText = "Congratulations!";
-        playerWin = true;
-    } else {
-        outro.innerText = "No Winner! Keep Playing!";}
+// RESET GAME
+
+reset.addEventListener('click', resetGame )
+   
+function resetGame(){
+    console.log("this works now too");
+    outro.innerText = "Click to Play!";
+    playerTurn.innerText = "X goes first!";
+    gameState.currentPlayer = 'X';
+    for (var i = 0 ; i < Object.keys(btn).length; i++){
+        btn[i].innerText = "-";
+        btn[i].disabled = false; 
+    }
+playWin = false;
 }
+
+
+
+
+
+// function checkWinner () {
+//     if (b1.innerText === gameState.currentPlayer && b2.innerText === gameState.currentPlayer && b3.innerText === gameState.currentPlayer){
+//      outro.innerText = "You Win!";
+//      playerTurn.innerText = "Congratulations!";
+//      playerWin = true;
+//     } else if (b4.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer){
+//          outro.innerText = "You Win!";
+//          playerTurn.innerText = "Congratulations!";
+//          playerWin = true;
+//     } else if (b7.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
+//         outro.innerText = "You Win!";
+//         playerTurn.innerText = "Congratulations!";   
+//         playerWin = true;
+//     } else if (b1.innerText === gameState.currentPlayer && b4.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
+//         outro.innerText = "You Win!";
+//         playerTurn.innerText = "Congratulations!";
+//         playerWin = true;
+//     } else if (b2.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b8.innerText === gameState.currentPlayer){
+//         outro.innerText = "You Win!";
+//         playerTurn.innerText = "Congratulations!";
+//         playerWin = true;
+//     } else if (b3.innerText === gameState.currentPlayer && b6.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
+//         outro.innerText = "You Win!";
+//         playerTurn.innerText = "Congratulations!";
+//         playerWin = true;
+//     } else if (b1.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b9.innerText === gameState.currentPlayer){
+//         outro.innerText = "You Win!";
+//         playerTurn.innerText = "Congratulations!";
+//         playerWin = true;
+//     } else if (b3.innerText === gameState.currentPlayer && b5.innerText === gameState.currentPlayer && b7.innerText === gameState.currentPlayer){
+//         outro.innerText = "You Win!";
+//         playerTurn.innerText = "Congratulations!";
+//         playerWin = true;
+//     } else {
+//         outro.innerText = "No Winner! Keep Playing!";}
+// }
 
 
 
