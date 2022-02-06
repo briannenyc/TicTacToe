@@ -177,7 +177,8 @@ function checkButton (){
     }
 
     if (playWin === true){
-        playerTurn.innerText = "Congratulations!"
+        playerTurn.innerText = "Congratulations!";
+        outro.innerText = "You win!";
     }
 }
 
